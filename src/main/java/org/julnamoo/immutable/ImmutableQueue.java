@@ -32,12 +32,15 @@ public class ImmutableQueue<T> implements Queue<T> {
             throw new NullPointerException();
         }
 
-        if (size + 1 < Integer.MAX_VALUE) {
-            items = Arrays.copyOf(items, size + 1);
-            items[size++] = t;
-        } else {
+        if (size == Integer.MAX_VALUE) {
             throw new ArrayIndexOutOfBoundsException();
         }
+        if (size + 1 > items.length) {
+            int newSize = Integer.min(Integer.MAX_VALUE, size + Integer.max(size / 2, 1));
+            items = Arrays.copyOf(items, newSize);
+        }
+
+        items[size++] = t;
         return this;
     }
 
@@ -50,9 +53,7 @@ public class ImmutableQueue<T> implements Queue<T> {
         if (items.length == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        T[] newItems = (T[]) new Object[size - 1];
-        System.arraycopy(items, 1, newItems, 0, size - 1);
-        return new ImmutableQueue<>(newItems);
+        return new ImmutableQueue<>(Arrays.copyOfRange(items, 1, size));
     }
 
     @Override

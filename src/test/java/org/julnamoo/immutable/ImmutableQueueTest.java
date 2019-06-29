@@ -42,10 +42,10 @@ public class ImmutableQueueTest {
                  .forEach(i -> queue.enQueue(i));
 
         // try dequeue as much as items
-        long dequeued = IntStream.range(0, 1000000)
-                                 .mapToObj(i -> queue.head())
-                                 .count();
-        assertEquals(1000000, dequeued);
+        long head = IntStream.range(0, 1000000)
+                             .mapToObj(i -> queue.head())
+                             .count();
+        assertEquals(1000000, head);
     }
 
     @Test
