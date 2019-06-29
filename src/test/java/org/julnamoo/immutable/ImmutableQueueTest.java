@@ -56,7 +56,6 @@ public class ImmutableQueueTest {
         queue.enQueue(Integer.MAX_VALUE);
         assertFalse(queue.isEmpty());
 
-        queue.deQueue();
-        assertTrue(queue.isEmpty());
+        assertTrue(queue.deQueue().isEmpty());
     }
 }

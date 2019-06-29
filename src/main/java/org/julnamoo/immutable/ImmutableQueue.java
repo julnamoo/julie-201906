@@ -53,7 +53,10 @@ public class ImmutableQueue<T> implements Queue<T> {
         if (size == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return new ImmutableQueue<>(Arrays.copyOfRange(items, 1, size - 1));
+        if (size - 1 > 0) {
+            return new ImmutableQueue<>(Arrays.copyOfRange(items, 1, size - 1));
+        }
+        return new ImmutableQueue<>(1);
     }
 
     @Override
