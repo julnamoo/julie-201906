@@ -50,10 +50,10 @@ public class ImmutableQueue<T> implements Queue<T> {
     @Override
     @SuppressWarnings("unchecked")
     public Queue<T> deQueue() {
-        if (items.length == 0) {
+        if (size == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return new ImmutableQueue<>(Arrays.copyOfRange(items, 1, size));
+        return new ImmutableQueue<>(Arrays.copyOfRange(items, 1, size - 1));
     }
 
     @Override
